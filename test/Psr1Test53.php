@@ -1,8 +1,8 @@
 <?php
 
-class Psr1Test53 extends PHPUnit_Framework_TestCase {
+class Psr1Test53 extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
+    public function setUp(): void {
         // Set up the dummy database connection
         ORM::set_db(new MockPDO('sqlite::memory:'));
 
@@ -10,7 +10,7 @@ class Psr1Test53 extends PHPUnit_Framework_TestCase {
         ORM::configure('logging', true);
     }
 
-    public function tearDown() {
+    public function tearDown(): void {
         ORM::configure('logging', false);
         ORM::set_db(null);
     }

@@ -1,11 +1,11 @@
 <?php
 
 namespace Paris\Tests;
-use ORM, Model, MockPDO, PHPUnit_Framework_TestCase;
+use ORM, Model, MockPDO;
 
-class ParisTest53 extends PHPUnit_Framework_TestCase {
+class ParisTest53 extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
+    public function setUp(): void {
         // Enable logging
         ORM::configure('logging', true);
 
@@ -14,7 +14,7 @@ class ParisTest53 extends PHPUnit_Framework_TestCase {
         ORM::set_db($db);
     }
 
-    public function tearDown() {
+    public function tearDown(): void {
         ORM::configure('logging', false);
         ORM::set_db(null);
     }

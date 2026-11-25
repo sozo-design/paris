@@ -1,7 +1,6 @@
 <?php
 
-require_once dirname(__FILE__) . '/idiorm.php';
-require_once dirname(__FILE__) . "/../paris.php";
+require_once dirname(__FILE__) . '/../vendor/autoload.php';
 
 /**
  *
@@ -13,12 +12,13 @@ class MockPDOStatement extends PDOStatement {
    private $current_row = 0;
    
    public function __construct() {}
-   public function execute($params = array()) {}
+   public function execute(?array $params = null): bool { return true; }
+   public function bindParam(string|int $param, mixed &$var, int $type = PDO::PARAM_STR, int $maxLength = 0, mixed $driverOptions = null): bool { return true; }
    
    /**
     * Return some dummy data
     */
-   public function fetch($fetch_style=PDO::FETCH_BOTH, $cursor_orientation=PDO::FETCH_ORI_NEXT, $cursor_offset=0) {
+   public function fetch(int $fetch_style = PDO::FETCH_BOTH, int $cursor_orientation = PDO::FETCH_ORI_NEXT, int $cursor_offset = 0): mixed {
        if ($this->current_row == 5) {
            return false;
        } else {
@@ -35,10 +35,12 @@ class MockPDOStatement extends PDOStatement {
  */
 class MockPDO extends PDO {
 
+   public $last_query;
+
    /**
     * Return a dummy PDO statement
     */
-   public function prepare($statement, $driver_options=array()) {
+   public function prepare(string $statement, array $driver_options = array()): PDOStatement|false {
        $this->last_query = new MockPDOStatement($statement);
        return $this->last_query;
    }
@@ -58,7 +60,7 @@ class MockDifferentPDO extends MockPDO {
     /**
      * Return a dummy PDO statement
      */
-    public function prepare($statement, $driver_options = array()) {
+    public function prepare(string $statement, array $driver_options = array()): PDOStatement|false {
         $this->last_query = new MockDifferentPDOStatement($statement);
         return $this->last_query;
     }

@@ -1,7 +1,7 @@
 <?php
 namespace
 {
-        class HasManyThroughTest extends PHPUnit_Framework_TestCase
+        class HasManyThroughTest extends \PHPUnit\Framework\TestCase
         {
                 private $sql = '
                         CREATE TABLE post (
@@ -34,7 +34,7 @@ namespace
                         INSERT INTO post_tag (post_id, tag_id) VALUES (1, 3);
                 ';
 
-                public function setUp () {
+                public function setUp(): void {
                         $db_handle = new PDO('sqlite::memory:');
                         $db_handle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
                         $db_handle->exec($this->sql);
@@ -43,7 +43,7 @@ namespace
                         ORM::configure('logging', true);
                 }
 
-                public function tearDown ()
+                public function tearDown(): void
                 {
                         ORM::configure('logging', false);
                         ORM::set_db(null);

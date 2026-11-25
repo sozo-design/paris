@@ -1,8 +1,8 @@
 <?php
 
-class MagicMethodsTest extends PHPUnit_Framework_TestCase {
+class MagicMethodsTest extends \PHPUnit\Framework\TestCase {
 
-    public function setUp() {
+    public function setUp(): void {
         // Set up the dummy database connection
         ORM::set_db(new MockPDO('sqlite::memory:'));
 
@@ -12,7 +12,7 @@ class MagicMethodsTest extends PHPUnit_Framework_TestCase {
         Model::$auto_prefix_models = null;
     }
 
-    public function tearDown() {
+    public function tearDown(): void {
         ORM::configure('logging', false);
         ORM::set_db(null);
 
