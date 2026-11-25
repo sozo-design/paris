@@ -485,16 +485,18 @@
             // formed by concatenating the names of the base class
             // and the associated class, in alphabetical order.
             if (is_null($join_class_name)) {
+                // The prefix may be null (no prefixing); treat that as an empty string.
+                $prefix = (string) self::$auto_prefix_models;
                 $base_model = explode('\\', $base_class_name);
                 $base_model_name = end($base_model);
-                if (substr($base_model_name, 0, strlen(self::$auto_prefix_models)) == self::$auto_prefix_models) {
-                    $base_model_name = substr($base_model_name, strlen(self::$auto_prefix_models), strlen($base_model_name));
+                if (substr($base_model_name, 0, strlen($prefix)) == $prefix) {
+                    $base_model_name = substr($base_model_name, strlen($prefix), strlen($base_model_name));
                 }
                 // Paris wasn't checking the name settings for the associated class.
                 $associated_model = explode('\\', $associated_class_name);
                 $associated_model_name = end($associated_model);
-                if (substr($associated_model_name, 0, strlen(self::$auto_prefix_models)) == self::$auto_prefix_models) {
-                    $associated_model_name = substr($associated_model_name, strlen(self::$auto_prefix_models), strlen($associated_model_name));
+                if (substr($associated_model_name, 0, strlen($prefix)) == $prefix) {
+                    $associated_model_name = substr($associated_model_name, strlen($prefix), strlen($associated_model_name));
                 }
                 $class_names = array($base_model_name, $associated_model_name);
                 
