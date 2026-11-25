@@ -1,11 +1,11 @@
 <?php
 
 namespace Paris\Tests {
-    use ORM, Model, MockPDO, PHPUnit_Framework_TestCase;
+    use ORM, Model, MockPDO;
 
-    class ModelPrefixingTest53 extends PHPUnit_Framework_TestCase {
+    class ModelPrefixingTest53 extends \PHPUnit\Framework\TestCase {
 
-        public function setUp() {
+        public function setUp(): void {
             // Set up the dummy database connection
             ORM::set_db(new MockPDO('sqlite::memory:'));
 
@@ -15,7 +15,7 @@ namespace Paris\Tests {
             Model::$auto_prefix_models = null;
         }
 
-        public function tearDown() {
+        public function tearDown(): void {
             ORM::configure('logging', false);
             ORM::set_db(null);
 

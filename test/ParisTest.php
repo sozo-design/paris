@@ -1,10 +1,10 @@
 <?php
 
-class ParisTest extends PHPUnit_Framework_TestCase {
+class ParisTest extends \PHPUnit\Framework\TestCase {
 
     const ALTERNATE = 'alternate';
 
-    public function setUp() {
+    public function setUp(): void {
         // Set up the dummy database connection
         ORM::set_db(new MockPDO('sqlite::memory:'));
 
@@ -12,7 +12,7 @@ class ParisTest extends PHPUnit_Framework_TestCase {
         ORM::configure('logging', true);
     }
 
-    public function tearDown() {
+    public function tearDown(): void {
         ORM::configure('logging', false);
         ORM::set_db(null);
     }
@@ -198,18 +198,14 @@ class ParisTest extends PHPUnit_Framework_TestCase {
         $this->assertSame(count($result_set), 5);
     }
 
-    /**
-     * @expectedException ParisMethodMissingException
-     */
     public function testInvalidModelFunctionCallDoesNotRecurse() {
+        $this->expectException(ParisMethodMissingException::class);
         $model = new Model();
         $model->noneExistentFunction();
     }
 
-    /**
-     * @expectedException IdiormMethodMissingException
-     */
     public function testInvalidORMWrapperFunctionCallDoesNotRecurse() {
+        $this->expectException(IdiormMethodMissingException::class);
         $ORMWrapper = Model::factory('Simple');
         $ORMWrapper->noneExistentFunction();
     }

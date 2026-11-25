@@ -1,12 +1,17 @@
 {
-    "name": "j4mie/paris",
+    "name": "sozodesign/paris",
     "type": "library",
-    "description": "A lightweight Active Record implementation for PHP5, built on top of Idiorm",
-    "keywords": ["paris", "orm", "active record", "model"],
-    "homepage": "http://j4mie.github.com/idiormandparis",
+    "description": "SOZO fork of Paris for PHP 8.4+: a lightweight Active Record implementation built on top of Idiorm",
+    "keywords": [
+        "paris",
+        "orm",
+        "active record",
+        "model"
+    ],
+    "homepage": "https://github.com/sozo-design/paris",
     "support": {
-        "issues": "https://github.com/j4mie/paris/issues",
-        "source": "https://github.com/j4mie/paris"
+        "issues": "https://github.com/sozo-design/paris/issues",
+        "source": "https://github.com/sozo-design/paris"
     },
     "authors": [
         {
@@ -26,6 +31,11 @@
             "email": "me@durhamhale.com",
             "homepage": "http://durhamhale.com",
             "role": "Maintainer"
+        },
+        {
+            "name": "Clive Walkden",
+            "homepage": "https://sozodesign.co.uk",
+            "role": "Maintainer of the SOZO fork"
         }
     ],
     "license": [
@@ -33,17 +43,32 @@
         "BSD-3-Clause",
         "BSD-4-Clause"
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/sozo-design/idiorm"
+        }
+    ],
     "require": {
-        "php": ">=5.2.0",
-        "j4mie/idiorm": "1.5.*"
+        "php": ">=8.4",
+        "sozodesign/idiorm": "^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.5",
+        "ext-pdo_sqlite": "*"
+    },
+    "replace": {
+        "j4mie/paris": "self.version"
+    },
+    "conflict": {
+        "clivewalkden/paris": "*"
+    },
+    "autoload": {
+        "classmap": [
+            "paris.php"
+        ]
     },
     "scripts": {
         "test": "phpunit"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^4.8"
-    },
-    "autoload": {
-        "classmap": ["paris.php"]
     }
 }

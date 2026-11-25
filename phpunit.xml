@@ -1,12 +1,25 @@
-<phpunit backupGlobals="true"
-         backupStaticAttributes="false"
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          bootstrap="test/bootstrap.php"
-         cacheTokens="false"
-         colors="true">
+         backupGlobals="true"
+         colors="true"
+         failOnDeprecation="true"
+         failOnNotice="true"
+         failOnWarning="true"
+         displayDetailsOnTestsThatTriggerDeprecations="true"
+         displayDetailsOnTestsThatTriggerNotices="true"
+         displayDetailsOnTestsThatTriggerWarnings="true"
+         displayDetailsOnPhpunitDeprecations="true">
     <testsuites>
         <testsuite name="Paris Test Suite">
             <directory suffix="Test.php">test</directory>
-            <directory suffix="Test53.php" phpVersion="5.3.0" phpVersionOperator=">=">test</directory>
+            <directory suffix="Test53.php">test</directory>
         </testsuite>
     </testsuites>
+    <source>
+        <include>
+            <file>paris.php</file>
+        </include>
+    </source>
 </phpunit>
